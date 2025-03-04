@@ -6,6 +6,16 @@ const controller = ({ strapi }) => ({
       .service('service')
       .getWelcomeMessage();
   },
+  async attributeProducts(ctx) {
+    try {
+      ctx.body = await strapi
+        .plugin('variant-item-strapi')
+        .service('service')
+        .getAttributeProducts();
+    } catch (error) {
+      ctx.body = error.message;
+    }
+  },
 });
 
 export default controller;

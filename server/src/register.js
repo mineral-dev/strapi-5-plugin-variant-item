@@ -1,5 +1,9 @@
 const register = ({ strapi }) => {
-  // register phase
+  strapi.customFields.register({
+    name: "variants",
+    plugin: "variant-item-strapi",
+    type: "json",
+  });
 };
 
 export default register;

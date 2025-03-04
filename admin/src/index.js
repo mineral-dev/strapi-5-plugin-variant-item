@@ -1,24 +1,66 @@
-import { getTranslation } from './utils/getTranslation';
-import { PLUGIN_ID } from './pluginId';
+"use strict";
+
 import { Initializer } from './components/Initializer';
 import { PluginIcon } from './components/PluginIcon';
+import { PLUGIN_ID } from './pluginId';
 
 export default {
   register(app) {
-    app.addMenuLink({
-      to: `plugins/${PluginIcon}`,
-      icon: PluginIcon,
+    // app.addMenuLink({
+    //   to: `plugins/${PluginIcon}`,
+    //   icon: PluginIcon,
+    //   intlLabel: {
+    //     id: `${PLUGIN_ID}.plugin.name`,
+    //     defaultMessage: PLUGIN_ID,
+    //   },
+    //   Component: async () => {
+    //     const { App } = await import('./pages/App');
+
+    //     return App;
+    //   },
+    // });
+
+    app.customFields.register({
+      name: "variants",
+      pluginId: "variant-item-strapi",
+      type: "json",
       intlLabel: {
-        id: `${PLUGIN_ID}.plugin.name`,
-        defaultMessage: PLUGIN_ID,
+        id: "variant-item.strapi.option.label",
+        defaultMessage: "Variant Product",
       },
-      Component: async () => {
-        const { App } = await import('./pages/App');
-
-        return App;
+      intlDescription: {
+        id: "variant-item.strapi.option.description",
+        defaultMessage: "Description Variant Option",
       },
+      icon: PluginIcon, // below in the article the code of that component
+      components: {
+        Input: async () => import("./components/Input") // below in the article the code of that component,
+      },
+      options: {
+        advanced: [
+          {
+            sectionTitle: {
+              id: 'global.settings',
+              defaultMessage: 'Settings',
+            },
+            items: [
+              {
+                name: 'required',
+                type: 'checkbox',
+                intlLabel: {
+                  id: 'variant-item-strapi.options.advanced.requiredField',
+                  defaultMessage: 'Required field',
+                },
+                description: {
+                  id: 'variant-item-strapi.options.advanced.requiredField.description',
+                  defaultMessage: "You won't be able to create an entry if this field is empty",
+                },
+              },
+            ],
+          },
+        ]
+      }
     });
-
     app.registerPlugin({
       id: PLUGIN_ID,
       initializer: Initializer,
