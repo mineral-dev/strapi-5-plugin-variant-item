@@ -105,7 +105,7 @@ const Input = (props) => {
          target: { name, type: attribute.type, value: JSON.stringify(response) },
       });
    }
-
+   
    return (
       <Flex direction="column" gap={1} alignItems="start">
          <Typography variant="pi">{label}</Typography>
@@ -128,7 +128,7 @@ const Input = (props) => {
                         flex: '1 1 auto',
                      }}
                   >
-                     <SingleSelect id={res?.attribute} label="Options" value={res?.attribute} onChange={(e)=> handleChangeAttributes(e, key)} required={true}  error={error}>
+                     <SingleSelect id={res?.attribute} label="Options" value={res?.attribute} onChange={(e)=> handleChangeAttributes(e, key)} required={required.toString()}  error={error}>
                         {
                            (options.length > 0) && options?.map((item, i)=> (
                               <SingleSelectOption key={i} value={item?.slug}>{item?.title}</SingleSelectOption>
@@ -146,7 +146,7 @@ const Input = (props) => {
                            flex: '1 1 auto',
                         }}
                      >
-                        <Combobox label="terms" value={res?.option?.slug}  onChange={(e)=> handleChange(e, key)} required={true}  error={error} disabled={disabled}>
+                        <Combobox label="terms" value={res?.option?.slug}  onChange={(e)=> handleChange(e, key)} required={required.toString()}  error={error} disabled={disabled}>
                            {
                               options.length > 0 &&
                               options
