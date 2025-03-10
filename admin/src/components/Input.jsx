@@ -128,7 +128,7 @@ const Input = (props) => {
                         flex: '1 1 auto',
                      }}
                   >
-                     <SingleSelect id={res?.attribute} label="Options" value={res?.attribute} onChange={(e)=> handleChangeAttributes(e, key)} required={required.toString()}  error={error}>
+                     <SingleSelect id={res?.attribute} label="Options" value={res?.attribute} onChange={(e)=> handleChangeAttributes(e, key)} required={required ? required.toString() : "false"}  error={error}>
                         {
                            (options.length > 0) && options?.map((item, i)=> (
                               <SingleSelectOption key={i} value={item?.slug}>{item?.title}</SingleSelectOption>
@@ -146,11 +146,11 @@ const Input = (props) => {
                            flex: '1 1 auto',
                         }}
                      >
-                        <Combobox label="terms" value={res?.option?.slug}  onChange={(e)=> handleChange(e, key)} required={required.toString()}  error={error} disabled={disabled}>
+                        <Combobox label="terms" value={res?.option?.slug}  onChange={(e)=> handleChange(e, key)} required={required ? required.toString() : "false"}  error={error} disabled={disabled ? disabled.toString() : "false"}>
                            {
                               options.length > 0 &&
                               options
-                              .filter((op)=> op?.slug.toLowerCase() === res?.attribute.toLowerCase())
+                              .filter((op)=> op?.slug?.toLowerCase() === res?.attribute?.toLowerCase())
                               .map((variants, v)=> (
                                  variants?.items?.map((variant, va)=> (
                                     <ComboboxOption
@@ -176,11 +176,11 @@ const Input = (props) => {
                         </Button>
                      }
                      {
-                        (result.length < options.length && key+1 == result.length ) &&
+                        (result?.length < options?.length && key+1 == result?.length ) &&
                         <Button
                            onClick={addOptions}
                            variant="secondary"
-                           disabled={ result.length == options.length }
+                           disabled={ result?.length == options?.length }
                            style={{
                               marginLeft: 16,
                            }}
