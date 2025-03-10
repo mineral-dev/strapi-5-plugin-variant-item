@@ -45,7 +45,7 @@ const Input = (props) => {
 
    useEffect(() => {
       getAttributes();
-   }, []);
+   }, [ value ]);
 
    const handleChangeAttributes = (e, key) => {
       let types = options?.filter((item)=> item?.slug === e ).map((item)=>item.type)
@@ -108,8 +108,9 @@ const Input = (props) => {
    
    return (
       <Flex direction="column" gap={1} alignItems="start">
-         <Typography variant="pi">{label}</Typography>
+         <Typography variant="pi">{label} <span className='kKpydp'>*</span></Typography>
          {
+            (result.length > 0) &&
             result?.map((res, key)=> (
                <Flex
                   key={`box-${key}`}
@@ -146,7 +147,7 @@ const Input = (props) => {
                            flex: '1 1 auto',
                         }}
                      >
-                        <Combobox label="terms" value={res?.option?.slug}  onChange={(e)=> handleChange(e, key)} required={required ? required.toString() : "false"}  error={error} disabled={disabled ? disabled.toString() : "false"}>
+                        <Combobox label="terms" value={res?.option?.slug}  onChange={(e)=> handleChange(e, key)} required={required ? required.toString() : "false"}  error={error}>
                            {
                               options.length > 0 &&
                               options
