@@ -8,7 +8,6 @@ import {
    Typography
 } from '@strapi/design-system';
 import { useEffect, useState } from 'react';
-import { useIntl } from "react-intl";
 
 const Input = (props) => {
    const {
@@ -24,9 +23,7 @@ const Input = (props) => {
       disabled
    } = props
    const [ options, setOptions ] = useState([])
-   const [ result, setResult ] = useState(value == 'null' || !value ? [{attribute: null, option: null, type: 'Button'}] : value)
-
-   const { formatMessage } = useIntl();
+   const [ result, setResult ] = useState((value == 'null' || !value || value == undefined) ? [{attribute: null, option: null, type: 'Button'}] : value)
 
    const getAttributes = async () => {
       try {
@@ -105,13 +102,15 @@ const Input = (props) => {
          target: { name, type: attribute.type, value: JSON.stringify(response) },
       });
    }
+
+   console.log(value, 'input')
    
    return (
-      <Flex direction="column" gap={1} alignItems="start">
+      <Flex key={value} direction="column" gap={1} alignItems="start">
          <Typography variant="pi">{label} <span className='kKpydp'>*</span></Typography>
          {
-            (result.length > 0) &&
-            result?.map((res, key)=> (
+            (result && result.length > 0) &&
+            result.map((res, key)=> (
                <Flex
                   key={`box-${key}`}
                   gap={4}
