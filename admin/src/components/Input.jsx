@@ -23,7 +23,18 @@ const Input = (props) => {
       disabled
    } = props
    const [ options, setOptions ] = useState([])
-   const [ result, setResult ] = useState((value == 'null' || !value || value == undefined) ? [{attribute: null, option: null, type: 'Button'}] : JSON.parse(value))
+   const [ result, setResult ] = useState(() => {
+      if (value === 'null' || !value || value === undefined) {
+         return [{ attribute: null, option: null, type: 'Button' }];
+      }
+    
+      try {
+         return typeof value === 'string' ? JSON.parse(value) : value;
+      } catch (error) {
+         console.log("Invalid JSON:", error);
+         return [{ attribute: null, option: null, type: 'Button' }];
+      }
+   })
 
    const getAttributes = async () => {
       try {
