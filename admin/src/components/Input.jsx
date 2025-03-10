@@ -7,7 +7,7 @@ import {
    SingleSelectOption,
    Typography
 } from '@strapi/design-system';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 const Input = (props) => {
    const {
@@ -23,7 +23,7 @@ const Input = (props) => {
       disabled
    } = props
    const [ options, setOptions ] = useState([])
-   const [ result, setResult ] = useState((value == 'null' || !value || value == undefined) ? [{attribute: null, option: null, type: 'Button'}] : value)
+   const [ result, setResult ] = useState((value == 'null' || !value || value == undefined) ? [{attribute: null, option: null, type: 'Button'}] : JSON.parse(value))
 
    const getAttributes = async () => {
       try {
@@ -44,7 +44,7 @@ const Input = (props) => {
       getAttributes();
    }, [ value ]);
 
-   const handleChangeAttributes = (e, key) => {
+   const handleChangeAttributes = useCallback((e, key) => {
       let types = options?.filter((item)=> item?.slug === e ).map((item)=>item.type)
       let map = {
          ...result[key],
@@ -62,13 +62,13 @@ const Input = (props) => {
       })
       
       setResult(res)
-   };
+   },[result, options, value]);
 
-   const handleChange = (e, key) => {
+   const handleChange = useCallback((e, key) => {
       // const value = JSON.parse(e)
-      if (options.length === 0) return;
+      if (options.length === 0 || result.length == 0) return;
       const find_data = options.flatMap((item)=> item.items).find((variant)=> variant?.slug == e)
-      if (!find_data) return;
+      if (!find_data ) return;
       const res = result.map((item, i)=> {
          if (i == key) {
             return {
@@ -89,7 +89,7 @@ const Input = (props) => {
       onChange({
          target: { name, type: attribute.type, value: JSON.stringify(res) },
       });
-   }
+   },[result, options, value])
 
    const addOptions = () => {
       setResult([ ...result, { attribute: null, option: null, type: 'Button' }])
@@ -103,8 +103,6 @@ const Input = (props) => {
       });
    }
 
-   console.log(value, 'input')
-   
    return (
       <Flex key={value} direction="column" gap={1} alignItems="start">
          <Typography variant="pi">{label} <span className='kKpydp'>*</span></Typography>
@@ -130,7 +128,7 @@ const Input = (props) => {
                   >
                      <SingleSelect id={res?.attribute} label="Options" value={res?.attribute} onChange={(e)=> handleChangeAttributes(e, key)} required={required ? required.toString() : "false"}  error={error}>
                         {
-                           (options.length > 0) && options?.map((item, i)=> (
+                           (options && options.length > 0) && options.map((item, i)=> (
                               <SingleSelectOption key={i} value={item?.slug}>{item?.title}</SingleSelectOption>
                            ))
                         }
@@ -147,21 +145,14 @@ const Input = (props) => {
                         }}
                      >
                         <Combobox label="terms" value={res?.option?.slug}  onChange={(e)=> handleChange(e, key)} required={required ? required.toString() : "false"}  error={error}>
-                           {
-                              options.length > 0 &&
-                              options
-                              .filter((op)=> op?.slug?.toLowerCase() === res?.attribute?.toLowerCase())
-                              .map((variants, v)=> (
-                                 variants?.items?.map((variant, va)=> (
-                                    <ComboboxOption
-                                       key={va}
-                                       value={variant?.slug}
-                                    >
-                                       {variant?.title}
-                                    </ComboboxOption>
-                                 ))
-                              ))
-                           }
+                        {options?.length > 0 &&
+                           options
+                              .find((op) => op?.slug?.toLowerCase() === res?.attribute?.toLowerCase())
+                              ?.items?.map((variant, va) => (
+                                 <ComboboxOption key={va} value={variant?.slug}>
+                                    {variant?.title}
+                                 </ComboboxOption>
+                              ))}
                         </Combobox>
                      </Flex>
                   }
