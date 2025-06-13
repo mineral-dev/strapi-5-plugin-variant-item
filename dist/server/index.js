@@ -6,7 +6,7 @@ const destroy = ({ strapi }) => {
 const register = ({ strapi }) => {
   strapi.customFields.register({
     name: "variants",
-    plugin: "variant-item-strapi",
+    plugin: "strapi-5-plugin-variant-item",
     type: "json"
   });
 };
@@ -16,20 +16,25 @@ const config = {
   }
 };
 const contentTypes = {};
+function getDefaultExportFromCjs(x) {
+  return x && x.__esModule && Object.prototype.hasOwnProperty.call(x, "default") ? x["default"] : x;
+}
 const controller = ({ strapi }) => ({
   index(ctx) {
-    ctx.body = strapi.plugin("variant-item-strapi").service("service").getWelcomeMessage();
+    ctx.body = strapi.plugin("strapi-5-plugin-variant-item").service("service").getWelcomeMessage();
   },
   async attributeProducts(ctx) {
     try {
-      ctx.body = await strapi.plugin("variant-item-strapi").service("service").getAttributeProducts();
+      ctx.body = await strapi.plugin("strapi-5-plugin-variant-item").service("service").getAttributeProducts();
     } catch (error) {
       ctx.body = error.message;
     }
   }
 });
+var controller_1 = controller;
+const controller$1 = /* @__PURE__ */ getDefaultExportFromCjs(controller_1);
 const controllers = {
-  controller
+  controller: controller$1
 };
 const middlewares = {};
 const policies = {};
@@ -97,8 +102,10 @@ const service = ({ strapi }) => ({
     return result;
   }
 });
+var service_1 = service;
+const service$1 = /* @__PURE__ */ getDefaultExportFromCjs(service_1);
 const services = {
-  service
+  service: service$1
 };
 const index = {
   bootstrap,

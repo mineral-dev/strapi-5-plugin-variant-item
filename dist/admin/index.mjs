@@ -16,7 +16,7 @@ const __variableDynamicImportRuntimeHelper = (glob, path, segs) => {
     );
   });
 };
-const PLUGIN_ID = "variant-item-strapi";
+const PLUGIN_ID = "strapi-5-plugin-variant-item";
 const Initializer = ({ setPlugin }) => {
   const ref = useRef(setPlugin);
   useEffect(() => {
@@ -32,7 +32,7 @@ const index = {
   register(app) {
     app.customFields.register({
       name: "variants",
-      pluginId: "variant-item-strapi",
+      pluginId: "strapi-5-plugin-variant-item",
       type: "json",
       intlLabel: {
         id: "variant-item.strapi.option.label",
@@ -45,7 +45,7 @@ const index = {
       icon: PluginIcon,
       // below in the article the code of that component
       components: {
-        Input: async () => import("../_chunks/Input-B4baJXQK.mjs")
+        Input: async () => import("../_chunks/Input-tpxdyjYV.mjs")
         // below in the article the code of that component,
       },
       options: {
@@ -60,11 +60,11 @@ const index = {
                 name: "required",
                 type: "checkbox",
                 intlLabel: {
-                  id: "variant-item-strapi.options.advanced.requiredField",
+                  id: "strapi-5-plugin-variant-item.options.advanced.requiredField",
                   defaultMessage: "Required field"
                 },
                 description: {
-                  id: "variant-item-strapi.options.advanced.requiredField.description",
+                  id: "strapi-5-plugin-variant-item.options.advanced.requiredField.description",
                   defaultMessage: "You won't be able to create an entry if this field is empty"
                 }
               }

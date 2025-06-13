@@ -1,7 +1,7 @@
 const register = ({ strapi }) => {
   strapi.customFields.register({
     name: "variants",
-    plugin: "variant-item-strapi",
+    plugin: "strapi-5-plugin-variant-item",
     type: "json",
   });
 };

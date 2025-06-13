@@ -22,7 +22,7 @@ export default {
 
     app.customFields.register({
       name: "variants",
-      pluginId: "variant-item-strapi",
+      pluginId: "strapi-5-plugin-variant-item",
       type: "json",
       intlLabel: {
         id: "variant-item.strapi.option.label",
@@ -48,11 +48,11 @@ export default {
                 name: 'required',
                 type: 'checkbox',
                 intlLabel: {
-                  id: 'variant-item-strapi.options.advanced.requiredField',
+                  id: 'strapi-5-plugin-variant-item.options.advanced.requiredField',
                   defaultMessage: 'Required field',
                 },
                 description: {
-                  id: 'variant-item-strapi.options.advanced.requiredField.description',
+                  id: 'strapi-5-plugin-variant-item.options.advanced.requiredField.description',
                   defaultMessage: "You won't be able to create an entry if this field is empty",
                 },
               },

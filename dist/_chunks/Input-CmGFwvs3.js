@@ -1,6 +1,8 @@
-import { jsxs, jsx } from "react/jsx-runtime";
-import { Flex, Typography, SingleSelect, SingleSelectOption, Combobox, ComboboxOption, Button } from "@strapi/design-system";
-import { useState, useEffect, useCallback } from "react";
+"use strict";
+Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
+const jsxRuntime = require("react/jsx-runtime");
+const designSystem = require("@strapi/design-system");
+const react = require("react");
 const Input = (props) => {
   const {
     attribute,
@@ -14,8 +16,8 @@ const Input = (props) => {
     value,
     disabled
   } = props;
-  const [options, setOptions] = useState([]);
-  const [result, setResult] = useState(() => {
+  const [options, setOptions] = react.useState([]);
+  const [result, setResult] = react.useState(() => {
     if (value === "null" || !value || value === void 0) {
       return [{ attribute: null, option: null, type: "Button" }];
     }
@@ -28,7 +30,7 @@ const Input = (props) => {
   });
   const getAttributes = async () => {
     try {
-      const response = await fetch("/api/variant-item-strapi/get-attribute-products", {
+      const response = await fetch("/api/strapi-5-plugin-variant-item/get-attribute-products", {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${localStorage.getItem("jwtToken")}`
@@ -40,10 +42,10 @@ const Input = (props) => {
       console.log(error2.message);
     }
   };
-  useEffect(() => {
+  react.useEffect(() => {
     getAttributes();
   }, [value]);
-  const handleChangeAttributes = useCallback((e, key) => {
+  const handleChangeAttributes = react.useCallback((e, key) => {
     let types = options?.filter((item) => item?.slug === e).map((item) => item.type);
     let map = {
       ...result[key],
@@ -60,7 +62,7 @@ const Input = (props) => {
     });
     setResult(res);
   }, [result, options, value]);
-  const handleChange = useCallback((e, key) => {
+  const handleChange = react.useCallback((e, key) => {
     if (options.length === 0 || result.length == 0) return;
     const find_data = options.flatMap((item) => item.items).find((variant) => variant?.slug == e);
     if (!find_data) return;
@@ -95,14 +97,14 @@ const Input = (props) => {
       target: { name, type: attribute.type, value: JSON.stringify(response) }
     });
   };
-  return /* @__PURE__ */ jsxs(Flex, { direction: "column", gap: 1, alignItems: "start", children: [
-    /* @__PURE__ */ jsxs(Typography, { variant: "pi", children: [
+  return /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Flex, { direction: "column", gap: 1, alignItems: "start", children: [
+    /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Typography, { variant: "pi", children: [
       label,
       " ",
-      /* @__PURE__ */ jsx("span", { className: "kKpydp", children: "*" })
+      /* @__PURE__ */ jsxRuntime.jsx("span", { className: "kKpydp", children: "*" })
     ] }),
-    result && result.length > 0 && result.map((res, key) => /* @__PURE__ */ jsxs(
-      Flex,
+    result && result.length > 0 && result.map((res, key) => /* @__PURE__ */ jsxRuntime.jsxs(
+      designSystem.Flex,
       {
         gap: 4,
         style: {
@@ -110,8 +112,8 @@ const Input = (props) => {
           width: "100%"
         },
         children: [
-          /* @__PURE__ */ jsx(
-            Flex,
+          /* @__PURE__ */ jsxRuntime.jsx(
+            designSystem.Flex,
             {
               direction: "column",
               alignItems: "stretch",
@@ -119,11 +121,11 @@ const Input = (props) => {
               style: {
                 flex: "1 1 auto"
               },
-              children: /* @__PURE__ */ jsx(SingleSelect, { id: res?.attribute, label: "Options", value: res?.attribute, onChange: (e) => handleChangeAttributes(e, key), required: required ? required.toString() : "false", error, children: options && options.length > 0 && options.map((item, i) => /* @__PURE__ */ jsx(SingleSelectOption, { value: item?.slug, children: item?.title }, i)) })
+              children: /* @__PURE__ */ jsxRuntime.jsx(designSystem.SingleSelect, { id: res?.attribute, label: "Options", value: res?.attribute, onChange: (e) => handleChangeAttributes(e, key), required: required ? required.toString() : "false", error, children: options && options.length > 0 && options.map((item, i) => /* @__PURE__ */ jsxRuntime.jsx(designSystem.SingleSelectOption, { value: item?.slug, children: item?.title }, i)) })
             }
           ),
-          res?.attribute && /* @__PURE__ */ jsx(
-            Flex,
+          res?.attribute && /* @__PURE__ */ jsxRuntime.jsx(
+            designSystem.Flex,
             {
               direction: "column",
               alignItems: "stretch",
@@ -131,12 +133,12 @@ const Input = (props) => {
               style: {
                 flex: "1 1 auto"
               },
-              children: /* @__PURE__ */ jsx(Combobox, { label: "terms", value: res?.option?.slug, onChange: (e) => handleChange(e, key), required: required ? required.toString() : "false", error, children: options?.length > 0 && options.find((op) => op?.slug?.toLowerCase() === res?.attribute?.toLowerCase())?.items?.map((variant, va) => /* @__PURE__ */ jsx(ComboboxOption, { value: variant?.slug, children: variant?.title }, va)) })
+              children: /* @__PURE__ */ jsxRuntime.jsx(designSystem.Combobox, { label: "terms", value: res?.option?.slug, onChange: (e) => handleChange(e, key), required: required ? required.toString() : "false", error, children: options?.length > 0 && options.find((op) => op?.slug?.toLowerCase() === res?.attribute?.toLowerCase())?.items?.map((variant, va) => /* @__PURE__ */ jsxRuntime.jsx(designSystem.ComboboxOption, { value: variant?.slug, children: variant?.title }, va)) })
             }
           ),
-          /* @__PURE__ */ jsxs(Flex, { direction: "column", alignItems: "stretch", gap: 11, children: [
-            result?.length > 1 && /* @__PURE__ */ jsxs(
-              Button,
+          /* @__PURE__ */ jsxRuntime.jsxs(designSystem.Flex, { direction: "column", alignItems: "stretch", gap: 11, children: [
+            result?.length > 1 && /* @__PURE__ */ jsxRuntime.jsxs(
+              designSystem.Button,
               {
                 onClick: () => removeOptions(key),
                 variant: "danger-light",
@@ -146,8 +148,8 @@ const Input = (props) => {
                 ]
               }
             ),
-            result?.length < options?.length && key + 1 == result?.length && /* @__PURE__ */ jsxs(
-              Button,
+            result?.length < options?.length && key + 1 == result?.length && /* @__PURE__ */ jsxRuntime.jsxs(
+              designSystem.Button,
               {
                 onClick: addOptions,
                 variant: "secondary",
@@ -168,6 +170,4 @@ const Input = (props) => {
     ))
   ] }, value);
 };
-export {
-  Input as default
-};
+exports.default = Input;
