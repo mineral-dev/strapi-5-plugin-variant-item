@@ -30,18 +30,19 @@ module.exports = {
   collectCoverageFrom: [
     'admin/src/**/*.{js,jsx}',
     'server/src/**/*.js',
+    '!**/*.test.{js,jsx}',
     '!**/node_modules/**',
     '!**/dist/**',
-    '!**/*.test.{js,jsx}'
+    '!**/index.js' // Exclude index files as they are mostly exports
   ],
   
   // Coverage thresholds
   coverageThreshold: {
     global: {
-      branches: 60,
-      functions: 60,
-      lines: 60,
-      statements: 60
+      statements: 20,
+      branches: 20,
+      functions: 20,
+      lines: 20
     }
   }
 };

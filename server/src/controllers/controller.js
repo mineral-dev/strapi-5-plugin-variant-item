@@ -18,4 +18,4 @@ const controller = ({ strapi }) => ({
   },
 });
 
-export default controller;
+module.exports = controller;

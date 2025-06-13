@@ -128,3 +128,30 @@ exports
 build
 .strapi-updater.json
 .strapi-cloud.json
+
+# Dependencies
+node_modules/
+
+# Tests
+*.coverage
+.nyc_output
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS
+.DS_Store
+
+# IDEs
+.idea
+.vscode
+*.swp
+*.swo
+
+# Misc
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local

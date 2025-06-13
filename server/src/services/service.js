@@ -37,4 +37,4 @@ const service = ({ strapi }) => ({
   }
 });
 
-export default service;
+module.exports = service;

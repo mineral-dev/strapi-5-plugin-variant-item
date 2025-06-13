@@ -16,6 +16,9 @@ const config = {
   }
 };
 const contentTypes = {};
+function getDefaultExportFromCjs(x) {
+  return x && x.__esModule && Object.prototype.hasOwnProperty.call(x, "default") ? x["default"] : x;
+}
 const controller = ({ strapi }) => ({
   index(ctx) {
     ctx.body = strapi.plugin("strapi-5-plugin-variant-item").service("service").getWelcomeMessage();
@@ -28,8 +31,10 @@ const controller = ({ strapi }) => ({
     }
   }
 });
+var controller_1 = controller;
+const controller$1 = /* @__PURE__ */ getDefaultExportFromCjs(controller_1);
 const controllers = {
-  controller
+  controller: controller$1
 };
 const middlewares = {};
 const policies = {};
@@ -97,8 +102,10 @@ const service = ({ strapi }) => ({
     return result;
   }
 });
+var service_1 = service;
+const service$1 = /* @__PURE__ */ getDefaultExportFromCjs(service_1);
 const services = {
-  service
+  service: service$1
 };
 const index = {
   bootstrap,
