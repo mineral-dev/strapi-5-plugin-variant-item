@@ -52,7 +52,7 @@
     "kind": "plugin",
     "name": "strapi-5-plugin-variant-item",
     "displayName": "Variant Item",
-    "description": ""
+    "description": "A Strapi plugin for managing product variants and options"
   },
   "name": "strapi-5-plugin-variant-item",
   "description": "",
