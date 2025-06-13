@@ -1,1 +1,1 @@
-# variant-item-strapi
+# strapi-5-plugin-variant-item

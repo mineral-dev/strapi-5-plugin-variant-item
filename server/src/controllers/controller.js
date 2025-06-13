@@ -1,7 +1,7 @@
 const controller = ({ strapi }) => ({
   index(ctx) {
     ctx.body = strapi
-      .plugin('variant-item-strapi')
+      .plugin('strapi-5-plugin-variant-item')
       // the name of the service file & the method.
       .service('service')
       .getWelcomeMessage();
@@ -9,7 +9,7 @@ const controller = ({ strapi }) => ({
   async attributeProducts(ctx) {
     try {
       ctx.body = await strapi
-        .plugin('variant-item-strapi')
+        .plugin('strapi-5-plugin-variant-item')
         .service('service')
         .getAttributeProducts();
     } catch (error) {

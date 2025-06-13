@@ -38,7 +38,7 @@ const Input = (props) => {
 
    const getAttributes = async () => {
       try {
-         const response = await fetch("/api/variant-item-strapi/get-attribute-products", {
+         const response = await fetch("/api/strapi-5-plugin-variant-item/get-attribute-products", {
             headers: {
                "Content-Type": "application/json",
                Authorization: `Bearer ${localStorage.getItem("jwtToken")}`,

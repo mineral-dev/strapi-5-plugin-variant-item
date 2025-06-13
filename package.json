@@ -1,7 +1,19 @@
 {
+  "name": "strapi-5-plugin-variant-item",
   "version": "0.0.0",
+  "description": "",
+  "author": "Zulfa Nafi <zul@mineral.co.id>",
+  "license": "MIT",
   "keywords": [],
   "type": "commonjs",
+  "repository": {
+    "type": "git", 
+    "url": "git+ssh://git@github.com/mineral-dev/strapi-5-plugin-variant-item.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mineral-dev/strapi-5-plugin-variant-item/issues"
+  },
+  "homepage": "https://github.com/mineral-dev/strapi-5-plugin-variant-item#readme",
   "exports": {
     "./package.json": "./package.json",
     "./strapi-admin": {
@@ -22,7 +34,7 @@
   ],
   "scripts": {
     "build": "strapi-plugin build",
-    "watch": "strapi-plugin watch",
+    "watch": "strapi-plugin watch", 
     "watch:link": "strapi-plugin watch:link",
     "verify": "strapi-plugin verify"
   },
@@ -50,20 +62,8 @@
   },
   "strapi": {
     "kind": "plugin",
-    "name": "variant-item-strapi",
+    "name": "strapi-5-plugin-variant-item",
     "displayName": "variants",
     "description": ""
-  },
-  "name": "variant-item-strapi",
-  "description": "",
-  "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "git+ssh://git@github.com/mineral-dev/variant-item-strapi.git"
-  },
-  "bugs": {
-    "url": "https://github.com/mineral-dev/variant-item-strapi/issues"
-  },
-  "homepage": "https://github.com/mineral-dev/variant-item-strapi#readme",
-  "author": "Zulfa Nafi <zul@mineral.co.id>"
+  }
 }
