@@ -1,1 +1,4 @@
-{}
+{
+  "plugin.name": "Variant Item",
+  "plugin.description": "A Strapi plugin for managing product variants and options"
+}

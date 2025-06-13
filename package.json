@@ -51,7 +51,7 @@
   "strapi": {
     "kind": "plugin",
     "name": "strapi-5-plugin-variant-item",
-    "displayName": "variants",
+    "displayName": "Variant Item",
     "description": ""
   },
   "name": "strapi-5-plugin-variant-item",
